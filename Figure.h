@@ -3,13 +3,25 @@
 #include <vector>
 #include <cstring>
 using namespace std;
-class Figure
-{
+
+class Figure {
 private:
-	static vector<Figure*> arr;
+    static vector<Figure*> arr;
 protected:
+    static vector<Figure*>& getArr() {
+        static vector<Figure*> arr;
+        return arr;
+    }
+
+    static Figure* add(Figure* f) {
+        if (f == NULL) return nullptr;
+        getArr().push_back(f);
+        return f;
+    }
+public:
     static Figure* createObject(const char* clsName) {
         if (clsName == NULL) return NULL;
+        vector<Figure*>& arr = getArr();
         for (size_t i = 0; i < arr.size(); i++) {
             if (strcmp(clsName, arr[i]->className()) == 0) {
                 return arr[i]->Clone();
@@ -17,8 +29,12 @@ protected:
         }
         return NULL;
     }
-public:
+
     static const vector<Figure*>& getSampleList() { return arr; }
+
+    virtual void Input(istream& is) = 0;
+    virtual void Output(ostream& os) = 0; // Bổ sung Output
+    virtual float Area() = 0;
 
     virtual const char* className() = 0;
     virtual Figure* Clone() = 0;
