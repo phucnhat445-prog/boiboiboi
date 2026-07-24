@@ -8,6 +8,12 @@ class Figure
 private:
 	static vector<Figure*> arr;
 protected:
+ static Figure* add(Figure* f) {
+        if (f == nullptr) return nullptr;
+        arr.push_back(f);
+        return f;
+    }
+
     static Figure* createObject(const char* clsName) {
         if (clsName == NULL) return NULL;
         for (size_t i = 0; i < arr.size(); i++) {
