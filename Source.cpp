@@ -33,7 +33,7 @@ int main() {
 
     if (rec != nullptr) {
 
-        cout << "User's choice: " << rec->className() << endl;
+        cout << "Lua chon cua ban: " << rec->className() << endl;
 
         cout << "\n--- Nhap du lieu ---" << endl;
         rec->Input(cin);
